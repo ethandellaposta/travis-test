@@ -17,7 +17,7 @@ stages:
   - name: ci-master
     if: (type != pull_request) AND (branch = master)
   - name: ci-branch
-    if: type = (pull_request) OR (branch != master)
+    if: type = (pull_request) OR (type = push)
 
 jobs:
   include:
