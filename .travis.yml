@@ -1,0 +1,27 @@
+language: node_js
+
+node_js:
+  - 12
+
+sudo: true
+
+addons:
+  chrome: stable
+
+cache:
+  directories:
+    - ~/.cache
+    - node_modules
+
+stages:
+  - name: ci-master
+    if: branch = master
+  - name: ci-branch
+    if: type = (pull_request) OR (branch != master)
+
+jobs:
+  include:
+    - stage: ci-master
+      script: yarn ci-master
+    - stage: ci-branch
+      script: yarn ci-branch
