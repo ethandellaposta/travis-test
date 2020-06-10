@@ -8,6 +8,11 @@ sudo: true
 addons:
   chrome: stable
 
+branches:
+only:
+  - master
+  - dev2
+
 cache:
   directories:
     - ~/.cache
@@ -15,13 +20,13 @@ cache:
 
 stages:
   - name: ci-master
-    if: branch = master
+    if: (type != pull_request) AND (branch = master)
   - name: ci-branch
-    if: type = (pull_request) OR (branch != master)
+    if: type = (pull_request) OR ((type = push) AND (branch != master))
 
 jobs:
   include:
     - stage: ci-master
-      script: echo "master build"
+      script: echo "master build!"
     - stage: ci-branch
-      script: echo "branch build"
+      script: echo "branch build!"
