@@ -8,6 +8,11 @@ sudo: true
 addons:
   chrome: stable
 
+branches:
+only:
+  - master
+  - dev2
+
 cache:
   directories:
     - ~/.cache
