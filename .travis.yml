@@ -15,13 +15,13 @@ cache:
 
 stages:
   - name: ci-master
-    if: branch = master
+    if: (type != pull_request) AND (branch = master)
   - name: ci-branch
     if: type = (pull_request) OR (branch != master)
 
 jobs:
   include:
     - stage: ci-master
-      script: echo "master build"
+      script: echo "master build!"
     - stage: ci-branch
-      script: echo "branch build"
+      script: echo "branch build!"
